@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login Required – ToonAI{% endblock %}
+
+{% block content %}
+
+<style>
+    .login-card {
+        background: rgba(15, 15, 15, 0.9);
+        border-radius: 22px;
+        border: 1px solid rgba(0, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .login-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+    }
+    .lock-icon {
+        color: #00e5ff;
+        animation: pulse 1.7s infinite ease-in-out;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.15); opacity: 1; }
+        100% { transform: scale(1); opacity: 0.8; }
+    }
+    .feature-box {
+        background: #0b0b0b;
+        border: 1px solid rgba(0, 255, 255, 0.12);
+        padding: 14px 18px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    .feature-box i {
+        font-size: 20px;
+        color: #00e5ff;
+    }
+</style>
+
+<section class="py-5 text-center" style="min-height:75vh;">
+    <div class="container">
+
+        <!-- Card -->
+        <div class="card login-card mx-auto shadow-lg p-5" style="max-width: 500px;">
+
+            <!-- Icon -->
+            <div class="text-center mb-4">
+                <i class="fa-solid fa-lock lock-icon" style="font-size: 70px;"></i>
+            </div>
+
+            <h2 class="text-info fw-bold mb-3">Login Required</h2>
+
+            <p class="text-light mb-4">
+                To view this cartoon’s details, cast your rating, write reviews, and add it to your lists,<br>
+                <strong class="text-info">please login to your ToonAI account.</strong>
+            </p>
+
+            <!-- Login Button -->
+            <a href="{% url 'login' %}" class="btn btn-info text-dark fw-bold w-100 py-2 mb-3">
+                <i class="fa-solid fa-right-to-bracket me-2"></i> Login Now
+            </a>
+
+            <!-- Signup -->
+            <p class="text-light mb-4">
+                Don’t have an account?
+                <a href="{% url 'signup' %}" class="text-info">Create one for free</a>
+            </p>
+
+            <!-- Extra Features Info -->
+            <h5 class="text-info fw-bold mb-3">Why Join ToonAI?</h5>
+
+            <div class="feature-box">
+                <i class="fa-solid fa-star-half-stroke"></i>
+                <span class="text-light">Rate cartoons from 1–10 and track your viewing progress.</span>
+            </div>
+
+            <div class="feature-box">
+                <i class="fa-solid fa-comment-dots"></i>
+                <span class="text-light">Write and read reviews from other ToonAI fans.</span>
+            </div>
+
+            <div class="feature-box">
+                <i class="fa-solid fa-list-check"></i>
+                <span class="text-light">Create your Watchlist, Watching, and Completed lists.</span>
+            </div>
+
+            <div class="feature-box">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span class="text-light">Get personalized recommendations powered by AI.</span>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

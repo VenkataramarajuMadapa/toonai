@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ToonAI - Login{% endblock title %}
+
+{% block content %}
+
+<div class="login-wrapper">
+    <div class="login-card">
+
+        <!-- Left side -->
+        <div class="login-left">
+            <h2>Welcome Back!</h2>
+            <p>Login to continue exploring your personalized cartoon recommendations with ToonAI.</p>
+        </div>
+
+        <!-- Right side -->
+        <div class="login-right">
+
+            <h4 class="text-center text-info fw-bold mb-4">Login to ToonAI</h4>
+
+            <form id="login-form" method="post">
+                {% csrf_token %}
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        <input type="text" name="username" class="form-control" placeholder="Enter your username" required>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+
+                        <button class="btn btn-outline-secondary text-light" type="button"
+                                id="password-toggle" onclick="togglePasswordVisibility()">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Remember Me -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="remember-me" name="remember_me">
+                        <label class="form-check-label" for="remember-me">Remember Me</label>
+                    </div>
+                    <a href="#" class="text-decoration-none small">Forgot Password?</a>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="btn btn-toon w-100">Login</button>
+            </form>
+
+            <!-- Create Account -->
+            <div class="text-center mt-3">
+                <p class="mb-1">New to ToonAI?</p>
+                <a href="{% url 'signup' %}" class="btn btn-outline-toon w-100">Create Your Account</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- PASSWORD TOGGLE -->
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("password");
+        const passwordToggle = document.getElementById("password-toggle");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggle.innerHTML = '<i class="fa fa-eye-slash"></i>';
+        } else {
+            passwordInput.type = "password";
+            passwordToggle.innerHTML = '<i class="fa fa-eye"></i>';
+        }
+    }
+</script>
+
+{% endblock content %}

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cartoon Library – ToonAI{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- ================= SEARCH + TITLE BAR ================= -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <h2 class="fw-bold text-info mb-2">Browse Cartoons</h2>
+
+        <form method="GET" class="search-bar d-flex">
+            <input type="text" name="q" value="{{ query }}"
+                   class="form-control bg-dark text-light search-input"
+                   placeholder="Search cartoons by name...">
+
+            <button class="btn btn-info text-dark fw-bold ms-2 px-3">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+
+    <hr class="border-secondary mb-4">
+
+
+    <!-- ================= NO RESULTS ================= -->
+    {% if page_obj|length == 0 %}
+    <div class="text-center py-5">
+        <img src="{% static 'images/no-results.png' %}"
+             width="180" class="mb-4 opacity-75">
+
+        <h4 class="text-light">No cartoons found</h4>
+        <p class="">Try searching with a different keyword.</p>
+
+        <a href="{% url 'cartoon_list' %}" class="btn btn-toon mt-3">
+            <i class="fa-solid fa-rotate-left me-2"></i> Reset Search
+        </a>
+    </div>
+    {% else %}
+
+    <!-- ================= CARTOON GRID ================= -->
+    <div class="row g-4">
+        {% for cartoon in page_obj %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+
+            <a href="{% url 'cartoon_detail' cartoon.tvmaze_id %}" class="text-decoration-none">
+
+                <div class="toon-card-modern">
+                    <div class="toon-img-wrapper">
+                        <img src="{{ cartoon.image_medium }}" alt="{{ cartoon.name }}" class="toon-img">
+                    </div>
+
+                    <div class="toon-info p-2">
+                        <h6 class="toon-name text-truncate">{{ cartoon.name }}</h6>
+
+                        <p class="toon-genre small text-light text-truncate mb-0">
+                            <i class="fa-solid fa-tag me-1 text-info"></i>{{ cartoon.genres }}
+                        </p>
+                    </div>
+                </div>
+
+            </a>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %} <!-- END no-results check -->
+
+
+    <!-- ================= PAGINATION ================= -->
+    <div class="d-flex justify-content-center mt-5">
+        {% if total_pages > 1 %}
+        <ul class="pagination toon-modern-pagination">
+
+            <!-- Previous -->
+            {% if page_obj.has_previous %}
+            <li>
+                <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+            </li>
+            {% endif %}
+
+            <!-- First page -->
+            {% if show_first %}
+                <li><a href="?page=1{% if query %}&q={{ query }}{% endif %}">1</a></li>
+                <li class="dots">•••</li>
+            {% endif %}
+
+            <!-- Middle pages -->
+            {% for num in page_range %}
+                {% if num == page_obj.number %}
+                    <li class="active"><span>{{ num }}</span></li>
+                {% else %}
+                    <li><a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Last page -->
+            {% if show_last %}
+                <li class="dots">•••</li>
+                <li><a href="?page={{ total_pages }}{% if query %}&q={{ query }}{% endif %}">{{ total_pages }}</a></li>
+            {% endif %}
+
+            <!-- Next -->
+            {% if page_obj.has_next %}
+            <li>
+                <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            </li>
+            {% endif %}
+
+        </ul>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}

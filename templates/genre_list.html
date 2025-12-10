@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Genres – ToonAI{% endblock %}
+
+{% block content %}
+<style>
+.genre-card {
+    background: linear-gradient(145deg, #0a0a0a, #111);
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid #1d1d1d;
+    transition: 0.35s ease;
+    position: relative;
+}
+.genre-card:hover {
+    border-color: #00e1ff;
+    box-shadow: 0 0 18px rgba(0, 225, 255, 0.4);
+}
+/* ICON */
+.genre-icon {
+    font-size: 42px;
+    color: #00e1ff;
+    margin-bottom: 12px;
+}
+/* HOVER GLOW RING INSIDE CARD */
+.genre-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(135deg, #009dff, #00f7ff, #009dff);
+    -webkit-mask: 
+        linear-gradient(#000 0 0) content-box, 
+        linear-gradient(#000 0 0);
+    mask: 
+        linear-gradient(#000 0 0) content-box, 
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: .3s;
+}
+.genre-card:hover::after {
+    opacity: 1;
+}
+</style>
+
+<section class="container py-5">
+    <h2 class="text-info fw-bold mb-4 text-center">
+        <i class="fa-solid fa-shapes me-2"></i> Explore by Genre
+    </h2>
+
+    <div class="row g-4">
+
+        {% for genre in genres %}
+        <div class="col-6 col-md-4 col-lg-3">
+            <a href="{% url 'genre_detail' genre %}" class="text-decoration-none">
+                <div class="genre-card">
+
+                    <!-- Dynamic Icons Based on Genre Name -->
+                    {% if "action" in genre|lower %}
+                        <i class="fa-solid fa-bolt genre-icon"></i>
+                    {% elif "comedy" in genre|lower %}
+                        <i class="fa-solid fa-laugh-squint genre-icon"></i>
+                    {% elif "drama" in genre|lower %}
+                        <i class="fa-solid fa-theater-masks genre-icon"></i>
+                    {% elif "fantasy" in genre|lower %}
+                        <i class="fa-solid fa-hat-wizard genre-icon"></i>
+                    {% elif "adventure" in genre|lower %}
+                        <i class="fa-solid fa-map genre-icon"></i>
+                    {% elif "horror" in genre|lower %}
+                        <i class="fa-solid fa-ghost genre-icon"></i>
+                    {% elif "sci" in genre|lower %}
+                        <i class="fa-solid fa-robot genre-icon"></i>
+                    {% else %}
+                        <i class="fa-solid fa-tag genre-icon"></i>
+                    {% endif %}
+
+                    <h5 class="text-light fw-bold">{{ genre }}</h5>
+
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile – ToonAI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+
+            <div class="profile-card">
+
+                <div class="row g-0">
+
+                    <!-- LEFT PANEL -->
+                    <div class="col-md-4 profile-left">
+                        <img src="{{ user.get_profile_picture }}" width="140" height="140" alt="Profile Photo">
+
+                        <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+
+                        <p><i class="fas fa-envelope"></i> {{ user.email }}</p>
+
+                        <p>
+                            <i class="fas fa-map-marker-alt"></i>
+                            {{ user.address|default:"Not provided" }}
+                        </p>
+                    </div>
+
+                    <!-- RIGHT PANEL -->
+                    <div class="col-md-8 profile-info">
+                        <h3 class="fw-bold mb-4 text-info">
+                            <i class="fas fa-user-circle me-2"></i> Profile Information
+                        </h3>
+
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">
+                                <strong>Username:</strong> {{ user.username }}
+                            </li>
+
+                            <li class="list-group-item">
+                                <strong>Email:</strong> {{ user.email }}
+                            </li>
+
+                            <li class="list-group-item">
+                                <strong>Phone:</strong> {{ user.phone|default:"Not provided" }}
+                            </li>
+
+                            <li class="list-group-item">
+                                <strong>Address:</strong> {{ user.address|default:"Not provided" }}
+                            </li>
+
+                            <li class="list-group-item">
+                                <strong>Joined On:</strong> {{ user.registered_on|date:"F j, Y" }}
+                            </li>
+
+                            <li class="list-group-item">
+                                <strong>Last Active:</strong>
+                                {% if user.last_active %}
+                                    {{ user.last_active|date:"F j, Y, g:i a" }}
+                                {% else %}
+                                    Not available
+                                {% endif %}
+                            </li>
+
+                        </ul>
+
+                        <div class="mt-4 text-center">
+                            <a href="{% url 'index' %}" class="btn-toon-outline">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Home
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

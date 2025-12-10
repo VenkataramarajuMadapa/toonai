@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}ToonAI – Home{% endblock %}
+
+{% block content %}
+<!--FEATURED BANNER (YOUR 5 SHOWS) -->
+<section class="featured-banner-section">
+    <div id="featuredCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+            {% for c in featured_shows %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                
+                <div class="featured-banner"
+                     style="background-image: url('{{ c.image_original }}');">
+                    <div class="featured-overlay"></div>
+
+                    <div class="featured-content">
+                        <h1 class="featured-title">{{ c.name }}</h1>
+                        <p class="w-50">{{ c.summary|safe|truncatewords:25 }}</p>
+
+                        <a href="{% url 'cartoon_detail' c.tvmaze_id %}"
+                           class="btn btn-lg btn-toon mt-3 px-4">
+                            <i class="fa-solid fa-circle-play me-2"></i> View Details
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<!--TRENDING GENRES (STATIC) -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <h3 class="sections-title text-info mb-4">Trending Genres</h3>
+
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3">
+                <div class="p-3 bg-black rounded shadow-sm">
+                    <i class="fa-solid fa-dragon fa-2x text-warning mb-2"></i>
+                    <h6 class="text-light">Fantasy</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="p-3 bg-black rounded shadow-sm">
+                    <i class="fa-solid fa-robot fa-2x text-info mb-2"></i>
+                    <h6 class="text-light">Sci-Fi</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="p-3 bg-black rounded shadow-sm">
+                    <i class="fa-solid fa-face-laugh-beam fa-2x text-success mb-2"></i>
+                    <h6 class="text-light">Comedy</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="p-3 bg-black rounded shadow-sm">
+                    <i class="fa-solid fa-fire-flame-curved fa-2x text-danger mb-2"></i>
+                    <h6 class="text-light">Action</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--TOP RATED (Horizontal Scroll)-->
+<section class="py-5 bg-black">
+    <div class="container">
+        <h3 class="sections-title text-info">Top Rated Cartoons</h3>
+
+        <div class="scroll-row">
+            {% for c in top_rated_Cartoon %}
+            <a href="{% url 'cartoon_detail' c.tvmaze_id %}" class="text-decoration-none">
+                <div class="toon-card-2">
+                    <img src="{{ c.image_medium }}" alt="{{ c.name }}">
+                    <div class="toon-card-2-title">{{ c.name }}</div>
+                    <div class="toon-rating">
+                        <i class="fa-solid fa-star text-warning"></i> {{ c.rating|default:"N/A" }}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!--RECENTLY PREMIERED (Grid) -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <h3 class="sections-title text-info">Recently Premiered</h3>
+
+        <div class="row g-4 premier-grid">
+            {% for c in recently_premiered %}
+            <div class="col-6 col-md-3 col-lg-2">
+                <a href="{% url 'cartoon_detail' c.tvmaze_id %}" class="text-decoration-none">
+                    <img src="{{ c.image_medium }}" alt="{{ c.name }}">
+                    <p class="mt-2 text-center text-light fw-bold">{{ c.name|truncatechars:20 }}</p>
+                    <p class="small text-center text-warning">
+                        <i class="fa-solid fa-calendar-days me-1"></i> {{ c.premiered }}
+                    </p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- NEW SECTION 3: FUN FACTS (STATIC TEXT) -->
+<section class="py-5 bg-dark text-light">
+    <div class="container">
+        <h3 class="sections-title text-info mb-3">
+            <i class="fa-solid fa-lightbulb me-2"></i> Fun Cartoon Facts
+        </h3>
+
+        <ul class="mx-auto" style="line-height:1.9;">
+            <li>
+                <i class="fa-solid fa-palette text-warning me-2"></i>
+                Many modern cartoons blend 2D, 3D, and motion-capture animation.
+            </li>
+
+            <li>
+                <i class="fa-solid fa-trophy text-success me-2"></i>
+                Some cartoon series have more than <strong>5000+ episodes</strong>.
+            </li>
+
+            <li>
+                <i class="fa-solid fa-microphone-lines text-info me-2"></i>
+                Multiple iconic characters are voiced by the <strong>same voice actor</strong>.
+            </li>
+
+            <li>
+                <i class="fa-solid fa-globe text-primary me-2"></i>
+                Cartoons are now created in <strong>100+ countries</strong> worldwide.
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!--CALL TO ACTION-->
+<section class="py-5 bg-black">
+    <div class="container">
+        <h3 class="sections-title text-info">Popular Cartoons</h3>
+
+        <div class="scroll-row">
+            {% for c in popular_Cartoon %}
+            <a href="{% url 'cartoon_detail' c.tvmaze_id %}" class="text-decoration-none">
+                <div class="toon-card-2">
+                    <img src="{{ c.image_medium }}" alt="{{ c.name }}">
+                    <div class="toon-card-2-title">{{ c.name }}</div>
+                    <div class="toon-rating">
+                        <i class="fa-solid fa-fire text-danger"></i> {{ c.popularity }}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!--NEW SECTION 4: WHY TOONAI? -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <h3 class="sections-title text-info mb-4">Why ToonAI?</h3>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-4 bg-black rounded shadow-sm">
+                    <i class="fa-solid fa-brain fa-3x text-info mb-3"></i>
+                    <h5 class="text-light">AI-Powered System</h5>
+                    <p class="text-light">We analyze patterns, genres, and preferences to enhance your experience.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-4 bg-black rounded shadow-sm">
+                    <i class="fa-solid fa-film fa-3x text-warning mb-3"></i>
+                    <h5 class="text-light">Massive Cartoon Library</h5>
+                    <p class="text-light">Updated directly from TVMaze API with thousands of global series.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-4 bg-black rounded shadow-sm">
+                    <i class="fa-solid fa-heart fa-3x text-danger mb-3"></i>
+                    <h5 class="text-light">Personal Watchlist</h5>
+                    <p class="text-light">Save, manage, and track what you watch instantly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--CALL TO ACTION-->
+<section class="py-5 text-center bg-info text-dark">
+    <div class="container">
+        <h3 class="fw-bold mb-3">
+            <i class="fa-solid fa-rocket me-2"></i>Start Exploring the Cartoon Universe
+        </h3>
+        <p class="mb-4">Browse thousands of cartoons updated from TVMaze API.</p>
+
+        <a href="{% url 'cartoon_list' %}" class="btn btn-dark fw-bold btn-lg px-4">
+            <i class="fa-solid fa-arrow-right me-2"></i> Browse Cartoons
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ToonAI – Create Account{% endblock title %}
+
+{% block content %}
+
+<div class="signup-wrapper">
+    <div class="signup-card">
+
+        <!-- LEFT SIDE -->
+        <div class="signup-left d-none d-md-block">
+            <h2><i class="fas fa-user-plus me-2"></i>Join ToonAI!</h2>
+            <p>Create your account and unlock your personalized cartoon universe. Track your favorites, explore new shows, and enjoy smart recommendations.</p>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="signup-right">
+
+            <h4 class="text-center text-info fw-bold mb-4">Create Your ToonAI Account</h4>
+
+            <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row g-3">
+
+                    <!-- First Name -->
+                    <div class="col-md-6">
+                        <label class="form-label">First Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+                        </div>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="col-md-6">
+                        <label class="form-label">Last Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+                        </div>
+                    </div>
+
+                    <!-- Username -->
+                    <div class="col-md-6">
+                        <label class="form-label">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                            <input type="text" name="username" class="form-control" placeholder="Choose a username" required>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="col-md-6">
+                        <label class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input type="password" name="password" class="form-control" placeholder="Create Password" required>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="col-md-6">
+                        <label class="form-label">Confirm Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                        </div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="col-md-6">
+                        <label class="form-label">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
+                            <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="col-md-6">
+                        <label class="form-label">Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                            <textarea name="address" class="form-control" rows="1" placeholder="City, Country" required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Profile Picture -->
+                    <div class="col-md-12">
+                        <label class="form-label">Profile Picture</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-image"></i></span>
+                            <input type="file" name="profile_picture" class="form-control" accept="image/*" required>
+                        </div>
+                        <small class="text-muted">Upload a clear cartoon-friendly image ✨</small>
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'login' %}" class="btn btn-outline-toon">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Login
+                    </a>
+                    <button type="submit" class="btn btn-toon">
+                        <i class="fas fa-paper-plane me-2"></i>Sign Up
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

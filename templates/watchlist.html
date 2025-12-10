@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Watchlist – ToonAI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <h2 class="fw-bold text-info mb-3">
+        <i class="fa-solid fa-layer-group me-2"></i> My Cartoon Lists
+    </h2>
+    <p class="text-muted mb-4">
+        Organize what you're watching, plan to watch later, or keep track of completed shows.
+    </p>
+
+    <!-- ===================== TABS ===================== -->
+    <ul class="nav nav-tabs toon-tabs mb-4" id="watchlistTabs">
+        <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-watchlist">
+                <i class="fa-solid fa-bookmark me-2"></i> Watchlist
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-watching">
+                <i class="fa-solid fa-play me-2"></i> Watching
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-completed">
+                <i class="fa-solid fa-check me-2"></i> Completed
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-canceled">
+                <i class="fa-solid fa-xmark me-2"></i> Canceled
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-notinterested">
+                <i class="fa-solid fa-ban me-2"></i> Not Interested
+            </button>
+        </li>
+    </ul>
+
+    <!-- ===================== TAB CONTENT ===================== -->
+    <div class="tab-content">
+
+        <!-- ---- WATCHLIST ---- -->
+        <div class="tab-pane fade show active" id="tab-watchlist">
+            <h4 class="fw-bold text-info mb-3">Your Watchlist</h4>
+            <p class="text-light small">Shows you saved to watch later.</p>
+
+            <div class="row g-4">
+                {% if watchlist %}
+                    {% for item in watchlist %}
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <a href="{% url 'cartoon_detail' item.cartoon.tvmaze_id %}" class="text-decoration-none">
+                            <div class="card bg-dark border-0 toon-card">
+                                <img src="{{ item.cartoon.image_medium }}" class="card-img-top">
+                                <div class="card-body p-2">
+                                    <h6 class="toon-title text-truncate">{{ item.cartoon.name }}</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-light">Your watchlist is empty. Add some shows!</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- ---- WATCHING ---- -->
+        <div class="tab-pane fade" id="tab-watching">
+            <h4 class="fw-bold text-success mb-3">Currently Watching</h4>
+            <p class="text-light small">Shows you're currently watching.</p>
+
+            <div class="row g-4">
+                {% if watching %}
+                    {% for item in watching %}
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <a href="{% url 'cartoon_detail' item.cartoon.tvmaze_id %}">
+                            <div class="card bg-dark border-0 toon-card">
+                                <img src="{{ item.cartoon.image_medium }}" class="card-img-top">
+                                <div class="card-body p-2">
+                                    <h6 class="toon-title text-truncate">{{ item.cartoon.name }}</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-light">You are not watching anything right now.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- ---- COMPLETED ---- -->
+        <div class="tab-pane fade" id="tab-completed">
+            <h4 class="fw-bold text-warning mb-3">Completed</h4>
+            <p class="text-light small">Shows you finished watching.</p>
+
+            <div class="row g-4">
+                {% if completed %}
+                    {% for item in completed %}
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <a href="{% url 'cartoon_detail' item.cartoon.tvmaze_id %}">
+                            <div class="card bg-dark border-0 toon-card">
+                                <img src="{{ item.cartoon.image_medium }}" class="card-img-top">
+                                <div class="card-body p-2">
+                                    <h6 class="toon-title text-truncate">{{ item.cartoon.name }}</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-light">You haven’t completed any shows yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- ---- CANCELED ---- -->
+        <div class="tab-pane fade" id="tab-canceled">
+            <h4 class="fw-bold text-danger mb-3">Canceled</h4>
+            <p class="text-light small">Shows you decided to stop watching.</p>
+
+            <div class="row g-4">
+                {% if canceled %}
+                    {% for item in canceled %}
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <a href="{% url 'cartoon_detail' item.cartoon.tvmaze_id %}">
+                            <div class="card bg-dark border-0 toon-card">
+                                <img src="{{ item.cartoon.image_medium }}" class="card-img-top">
+                                <div class="card-body p-2">
+                                    <h6 class="toon-title text-truncate">{{ item.cartoon.name }}</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-light">Nothing canceled.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- ---- NOT INTERESTED ---- -->
+        <div class="tab-pane fade" id="tab-notinterested">
+            <h4 class="fw-bold text-secondary mb-3">Not Interested</h4>
+            <p class="text-light small">Shows you want to hide from recommendations.</p>
+
+            <div class="row g-4">
+                {% if not_interested %}
+                    {% for item in not_interested %}
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <a href="{% url 'cartoon_detail' item.cartoon.tvmaze_id %}">
+                            <div class="card bg-dark border-0 toon-card">
+                                <img src="{{ item.cartoon.image_medium }}" class="card-img-top">
+                                <div class="card-body p-2">
+                                    <h6 class="toon-title text-truncate">{{ item.cartoon.name }}</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-light">You haven't marked anything as not interested.</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

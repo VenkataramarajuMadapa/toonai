@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Recommended Cartoons – ToonAI{% endblock %}
+
+{% block content %}
+<div class="container recommend-page">
+    <!-- PAGE TITLE= -->
+    <h2 class="fw-bold text-info text-center mb-4 mt-2">
+        <i class="fa-solid fa-wand-magic-sparkles me-2"></i>
+        Personalized Recommendations
+    </h2>
+
+    {% if not is_personalized %}
+    <div class="alert alert-info text-center mb-5">
+        Add a few cartoons to your list to unlock personalized recommendations!
+    </div>
+    {% endif %}
+
+    <!-- 1) HYBRID RECOMMENDATIONS= -->
+    <section class="section-block">
+        <h3 class="section-title">
+            <i class="fa-solid fa-bolt me-2 text-warning"></i>
+            Top Picks For You
+        </h3>
+        <p class="section-subtitle">A smart blend of collaborative + content-based suggestions</p>
+
+        <div class="slider mt-3">
+            {% for item in hybrid_results %}
+            <a href="{% url 'cartoon_detail' item.tvmaze_id %}" class="text-decoration-none">
+                <div class="toon-card">
+                    <img src="{{ item.image_medium }}" class="toon-img">
+                    <div class="toon-info">
+                        <div class="toon-name text-truncate">{{ item.name }}</div>
+                        <div class="toon-rating">
+                            <i class="fa-solid fa-star"></i> {{ item.rating }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <p class="text-muted">No hybrid recommendations available.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 2) COLLABORATIVE FILTERING= -->
+    <section class="section-block">
+        <h3 class="section-title text-success">
+            <i class="fa-solid fa-users me-2"></i>
+            Viewers Also Liked
+        </h3>
+        <p class="section-subtitle">Suggestions from similar users with similar taste</p>
+
+        <div class="slider mt-3">
+            {% for item in collab_results %}
+            <a href="{% url 'cartoon_detail' item.tvmaze_id %}" class="text-decoration-none">
+                <div class="toon-card">
+                    <img src="{{ item.image_medium }}" class="toon-img">
+                    <div class="toon-info">
+                        <div class="toon-name text-truncate">{{ item.name }}</div>
+                        <div class="toon-rating">
+                            <i class="fa-solid fa-star"></i> {{ item.rating }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <p class="text-muted">No collaborative recommendations available.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 3) CONTENT-BASED FILTERING= -->
+    <section class="section-block">
+        <h3 class="section-title text-warning">
+            <i class="fa-solid fa-brain me-2"></i>
+            Based on Your Interests
+        </h3>
+        <p class="section-subtitle">We analyzed genres, story themes, and descriptions you love</p>
+
+        <div class="slider mt-3">
+            {% for item in content_results %}
+            <a href="{% url 'cartoon_detail' item.tvmaze_id %}" class="text-decoration-none">
+                <div class="toon-card">
+                    <img src="{{ item.image_medium }}" class="toon-img">
+                    <div class="toon-info">
+                        <div class="toon-name text-truncate">{{ item.name }}</div>
+                        <div class="toon-rating">
+                            <i class="fa-solid fa-star"></i> {{ item.rating }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <p class="text-muted">No content-based recommendations available.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 4) CLUSTER-BASED RECOMMENDATIONS= -->
+    <section class="section-block">
+        <h3 class="section-title text-primary">
+            <i class="fa-solid fa-layer-group me-2"></i>
+            Recommendation Categories
+        </h3>
+        <p class="section-subtitle">Groups created using Fuzzy C-Means clustering</p>
+
+        {% for group in cluster_results %}
+        <div class="mt-4">
+            <h5 class="text-light fw-bold mb-2">
+                <i class="fa-solid fa-tag me-2 text-info"></i>
+                {{ group.cluster_name }}
+            </h5>
+
+            {% if group.keywords %}
+            <div class="mb-2">
+                {% for word in group.keywords %}
+                <span class="cluster-badge">#{{ word }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="slider mt-2">
+                {% for item in group.cartoons %}
+                <a href="{% url 'cartoon_detail' item.tvmaze_id %}" class="text-decoration-none">
+                    <div class="toon-card">
+                        <img src="{{ item.image_medium }}" class="toon-img">
+                        <div class="toon-info">
+                            <div class="toon-name text-truncate">{{ item.name }}</div>
+                            <div class="toon-rating"><i class="fa-solid fa-star"></i> {{ item.rating }}</div>
+                        </div>
+                    </div>
+                </a>
+                {% empty %}
+                <p class="text-muted">No items in this category.</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
+    <div class="text-center mt-5">
+        <a href="{% url 'cartoon_list' %}" class="btn btn-outline-info px-4">
+            <i class="fa-solid fa-compass"></i> Browse All Cartoons
+        </a>
+    </div>
+
+</div>
+{% endblock %}

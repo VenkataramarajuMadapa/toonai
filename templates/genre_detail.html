@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ genre_name }} – Genre{% endblock %}
+
+{% block content %}
+
+<style>
+.toon-genre-card {
+    background: #0d0d0d;
+    border-radius: 14px;
+    padding: 10px;
+    transition: 0.3s ease;
+    border: 1px solid #1c1c1c;
+}
+.toon-genre-card:hover {
+    border-color: #00e1ff;
+    box-shadow: 0 0 15px rgba(0, 225, 255, 0.3);
+}
+.genre-title {
+    text-shadow: 0 0 4px rgba(0, 225, 255, 0.7);
+}
+.toon-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+}
+.rating-small {
+    font-size: 13px;
+    color: #ccc;
+}
+.rating-small i {
+    color: #ffc400;
+}
+</style>
+
+<section class="container py-5">
+
+    <h2 class="text-info fw-bold mb-4 genre-title">
+        <i class="fa-solid fa-tags me-2"></i> {{ genre_name }} Cartoons
+    </h2>
+
+    {% if cartoons %}
+    <div class="row g-4">
+
+        {% for c in cartoons %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <a href="{% url 'cartoon_detail' c.tvmaze_id %}" class="text-decoration-none">
+
+                <div class="toon-genre-card">
+                    <!-- Poster -->
+                    <img src="{{ c.image_medium }}"
+                         style="width: 100%; border-radius: 10px;">
+
+                    <!-- Title -->
+                    <div class="toon-title mt-2">
+                        {{ c.name|truncatechars:20 }}
+                    </div>
+
+                    <!-- Rating -->
+                    <div class="rating-small mt-1">
+                        <i class="fa-solid fa-star"></i>
+                        {{ c.rating|default:"N/A" }}
+                    </div>
+                </div>
+
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+    <div class="alert alert-dark mt-4 text-light border-info" style="background:#0d0d0d;">
+        <i class="fa-solid fa-circle-info me-2"></i>
+        No cartoons found under this genre.
+    </div>
+    {% endif %}
+</section>
+
+{% endblock %}
