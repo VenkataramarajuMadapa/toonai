@@ -1,0 +1,565 @@
+/* =========================================================
+   GLOBAL STYLES
+   ========================================================= */
+body {
+    background-color: #0d0d0d;
+    font-family: 'Poppins', sans-serif;
+}
+a {
+    color: #00d2ff;
+}
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar-brand {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #00d2ff !important;
+}
+.toon-logo {
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+.nav-link {
+    font-weight: 600;
+    color: #f0f0f0 !important;
+}
+.nav-link:hover {
+    color: #00d2ff !important;
+}
+.search-box input {
+    border-radius: 10px;
+    border: 1px solid #444;
+}
+.search-box input:focus {
+    border-color: #00d2ff;
+    box-shadow: none;
+}
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn-toon {
+    background-color: #00d2ff;
+    color: #000;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 6px 16px;
+}
+.btn-toon:hover {
+    background-color: #00b4e6;
+}
+.btn-outline-toon {
+    border: 2px solid #00d2ff;
+    color: #00d2ff;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 25px;
+}
+.btn-outline-toon:hover {
+    background: #00d2ff;
+    color: #000;
+}
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+    font-size: 0.85rem;
+}
+/* =========================================================
+   LOGIN PAGE
+   ========================================================= */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    min-height: 80vh;
+}
+.login-card {
+    display: flex;
+    background: #111;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+}
+/* LEFT SIDE */
+.login-left {
+    flex: 1;
+    background: linear-gradient(135deg, #00d2ff, #0072ff);
+    padding: 50px 30px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.login-left h2 {
+    font-weight: 800;
+}
+.login-left p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+/* RIGHT SIDE */
+.login-right {
+    flex: 1;
+    background: #1b1b1b;
+    padding: 40px 30px;
+    color: white;
+}
+
+/* LOGIN FORM FIELDS */
+.login-right .input-group-text {
+    background: #333;
+    border: none;
+    color: #00d2ff;
+}
+.login-right .form-control {
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+}
+.login-right .form-control:focus {
+    border-color: #00d2ff;
+    box-shadow: none;
+}
+
+/* =========================================================
+   SIGNUP PAGE
+   ========================================================= */
+.signup-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    min-height: 90vh;
+}
+.signup-card {
+    display: flex;
+    background: #111;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1100px;
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+}
+/* LEFT PANEL */
+.signup-left {
+    flex: 1;
+    background: linear-gradient(135deg, #00d2ff, #0072ff);
+    padding: 60px 40px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.signup-left h2 {
+    font-weight: 800;
+    font-size: 32px;
+}
+.signup-left p {
+    font-size: 15px;
+    opacity: 0.9;
+    margin-top: 10px;
+}
+/* RIGHT PANEL */
+.signup-right {
+    flex: 1.2;
+    background: #1b1b1b;
+    padding: 40px;
+    color: white;
+}
+
+/* SIGNUP FORM FIELDS */
+.signup-right .input-group-text {
+    background: #333;
+    border: none;
+    color: #00d2ff;
+}
+.signup-right .form-control,
+.signup-right textarea {
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+}
+.signup-right .form-control:focus,
+.signup-right textarea:focus {
+    border-color: #00d2ff;
+    box-shadow: none;
+    color: white;
+}
+
+/* =========================================================
+   PROFILE PAGE
+   ========================================================= */
+.profile-card {
+    background: #111;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+    border: 1px solid #222;
+}
+.profile-left {
+    background: linear-gradient(135deg, #00d2ff, #0072ff);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+.profile-left img {
+    border: 4px solid white;
+    border-radius: 50%;
+}
+.profile-left h4 {
+    margin-top: 15px;
+    font-weight: 700;
+}
+.profile-left p {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 6px;
+}
+.profile-info {
+    background: #1b1b1b;
+    color: white;
+    padding: 35px;
+}
+.profile-info .list-group-item {
+    background: transparent;
+    border: 1px solid #333;
+    color: #e3e3e3;
+    padding: 14px 20px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+.profile-info strong {
+    color: #00d2ff;
+}
+.btn-toon-outline {
+    border: 2px solid #00d2ff;
+    color: #00d2ff;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+.btn-toon-outline:hover {
+    background: #00d2ff;
+    color: #000;
+}
+/* =========================================================
+   CARTOON AND CARTOON DETAILS PAGE
+   ========================================================= */
+.toon-card-modern {
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all .3s ease;
+    border: 1px solid #222;
+}
+.toon-card-modern:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+.toon-img-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+.toon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .3s ease;
+}
+.toon-card-modern:hover .toon-img {
+    transform: scale(1);
+}
+.toon-name {
+    color: #00d2ff;
+    font-weight: 600;
+}
+/* ---- Search bar ---- */
+.search-bar .search-input {
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+/* ---- Modern Pagination ---- */
+.toon-modern-pagination {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+.toon-modern-pagination li a,
+.toon-modern-pagination li span {
+    display: block;
+    padding: 8px 14px;
+    background: #111;
+    color: #fff;
+    border-radius: 8px;
+    border: 1px solid #222;
+    transition: .3s;
+}
+.toon-modern-pagination li a:hover {
+    background: #00d2ff;
+    color: #000;
+}
+.toon-modern-pagination .active span {
+    background: #00d2ff;
+    color: #000;
+    font-weight: bold;
+}
+.toon-modern-pagination .dots {
+    padding: 8px 14px;
+    color: #777;
+}
+/* ======== Detail Hero Section ======== */
+.detail-hero {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    padding: 80px 0;
+}
+.detail-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    z-index: 1;
+}
+.detail-content {
+    position: relative;
+    z-index: 10;
+}
+#star-rating {
+    position: relative;
+    z-index: 10; /* Must be ABOVE overlay */
+}
+.user-star {
+    pointer-events: auto;
+    transition: color .2s;
+}
+/* ======= Poster ======= */
+.poster-wrapper {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 3px solid #00d2ff;
+}
+.detail-poster {
+    width: 100%;
+    border-radius: 12px;
+}
+/* ======= Tags / Genres ======= */
+.detail-tag {
+    background: #00d2ff;
+    color: #000;
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    margin-right: 6px;
+    font-weight: 600;
+}
+/* ======= Rating ======= */
+.rating-box {
+    display: inline-flex;
+    align-items: center;
+    background: #111;
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+/* ======= Detail Info ======= */
+.detail-info-list {
+    list-style: none;
+    padding-left: 0;
+}
+.detail-info-list li {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #ccc;
+}
+/* ======= About Section ======= */
+.container p {
+    line-height: 1.7;
+}
+/* Watchlist action buttons */
+.watchlist-buttons .watch-btn {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: 0.3s ease;
+}
+.watchlist-buttons .watch-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+}
+/* Adjust icons inside buttons */
+.watch-btn i {
+    font-size: 16px;
+}
+/* =========================================================
+   INDEX/ HOME PAGE
+   ========================================================= */
+/* Featured Banner */
+.featured-banner {
+    position: relative;
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 2px solid #00d2ff;
+}
+.featured-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+}
+.featured-content {
+    position: absolute;
+    bottom: 40px;
+    left: 50px;
+    color: white;
+}
+.featured-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-shadow: 0 0 20px rgba(0,212,255,0.5);
+}
+.sections-title {
+    font-size: 1.6rem;
+    border-left: 4px solid #00d2ff;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+/* Horizontal Scroll Sections */
+.scroll-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 18px;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+}
+.scroll-row::-webkit-scrollbar { display: none; }
+
+/* Cards */
+.toon-card-2 {
+    width: 180px;
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.2s ease;
+    border: 1px solid #222;
+}
+.toon-card-2:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px rgba(0,212,255,0.3);
+}
+.toon-card-2 img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+.toon-card-2-title {
+    color: #00d2ff;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 8px;
+}
+.toon-rating {
+    font-size: 13px;
+    color: #bbb;
+    padding: 0 8px 8px 8px;
+}
+
+/* Grid for Recently Premiered */
+.premier-grid img {
+    border-radius: 12px;
+    height: 260px;
+    object-fit: cover;
+    width: 100%;
+    transition: 0.2s;
+    border: 1px solid #333;
+}
+.premier-grid img:hover {
+    box-shadow: 0 0 20px rgba(0,212,255,0.3);
+    transform: scale(1.03);
+}
+
+/* =========================================================
+   RECOMMENDATION PAGE
+   ========================================================= */
+.recommend-page {
+    max-width: 1200px;
+}
+/* Section Blocks */
+.section-block {
+    background: #0e0e11;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 40px;
+    border: 1px solid #1f1f26;
+}
+/* Titles */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00e5ff;
+}
+.section-subtitle {
+    color: #a8a8a8;
+    margin-top: -5px;
+    font-size: 0.9rem;
+}
+/* Slider */
+.slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+.slider::-webkit-scrollbar {
+    height: 6px;
+}
+.slider::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 20px;
+}
+/* Card */
+.toon-card {
+    min-width: 150px;
+    background: #16161a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.25s ease-in-out;
+}
+.toon-card:hover {
+    transform: translateY(-5px);
+}
+.toon-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.toon-info {
+    padding: 10px;
+    color: #fff;
+}
+.toon-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+.toon-rating {
+    font-size: 0.85rem;
+    color: #ffd65a;
+}
+/* Badge for cluster keywords */
+.cluster-badge {
+    background: #1e1e27;
+    color: #00d0ff;
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin-right: 5px;
+    font-size: 0.75rem;
+    border: 1px solid #003c47;
+}
